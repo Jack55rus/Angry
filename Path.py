@@ -99,7 +99,6 @@ class Path:
         j -= 1
         ###
         D_field = []
-        
         ###
         actual_path = [(0, 0)]*dots
         if self.char == 'A':
@@ -107,6 +106,7 @@ class Path:
             i, j = actual_path[-1]
             self.__move_down(i+1, j, D_field, D=True)
             actual_path += D_field
+            actual_path.insert(0, None)
         elif self.char == 'B':
             actual_path[0] = (B[0], B[1])
             actual_path[1:starting_dot_B] = path[starting_dot_B+1:]
@@ -114,6 +114,7 @@ class Path:
             i, j = actual_path[-1]
             self.__move_up(i-1, j, D_field, D=True)
             actual_path += D_field
+            actual_path.insert(0, None)
         elif self.char == 'C':
             actual_path[0] = (C[0], C[1]) # starting_dot_C = 8
             actual_path[1:dots-starting_dot_C] = path[starting_dot_C+1:] 
@@ -121,6 +122,7 @@ class Path:
             i, j = actual_path[-1]
             self.__move_left(i, j-1, D_field, D=True)
             actual_path += D_field
+            actual_path.insert(0, None)
         elif self.char == 'E':
             actual_path[0] = (E[0], E[1])
             actual_path[1:dots-starting_dot_E] = path[starting_dot_E+1:]
@@ -128,6 +130,12 @@ class Path:
             i, j = actual_path[-1]
             self.__move_right(i, j+1, D_field, D=True)
             actual_path += D_field
+            actual_path.insert(0, None)
+        '''
+        inserting None simulates 'the home' area
+        this is done to avoid creating another class (e.g. Box or Home)
+        furthermore, it allows to return a suspended pawn just by passing a negative argument to the move method
+        '''
         return actual_path
     
     def get_path(self):
