@@ -30,13 +30,15 @@ class Board:
                 else:
                     self.board[i][j] = '*'
                     
-    def update_board(self, coords, symbol):
-        '''
-        puts a new value into the board instead of the existing one 
-        coords: a tuple w/ a size of 2
-        symbol: a letter to put in lieu of the existing value
-        '''
-        self.board[coords[0]][coords[1]] = symbol
+        
+    def update_board(self, prev_coords, new_coords, char):
+        if prev_coords is None:
+            self.board[new_coords[0]][new_coords[1]] = char
+        elif prev_coords is not None and new_coords is None:
+            self.board[prev_coords[0]][prev_coords[1]] = '*'
+        elif prev_coords is not None and new_coords is not None:
+            self.board[prev_coords[0]][prev_coords[1]] = '*'
+            self.board[new_coords[0]][new_coords[1]] = char
     
     def show_board(self):
         '''

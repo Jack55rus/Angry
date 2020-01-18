@@ -1,3 +1,5 @@
+import numpy as np
+
 class Path:
     '''
     path class is used to construct a game path for a particular pawn 
@@ -8,7 +10,7 @@ class Path:
         char: a letter 
         '''
         self.char = char
-        self.board = board.get_board()
+        self.board = np.copy(board.get_board())
         self.path = []
         self.n = len(self.board)
         self.p = int((self.n-3)/2) # number of pawns = # number of D-spots
@@ -102,8 +104,9 @@ class Path:
         ###
         actual_path = [(0, 0)]*dots
         if self.char == 'A':
-            actual_path = path[:len(path)]
+            actual_path = path[:len(path)-1]
             i, j = actual_path[-1]
+            # print(i, j)
             self.__move_down(i+1, j, D_field, D=True)
             actual_path += D_field
             actual_path.insert(0, None)
