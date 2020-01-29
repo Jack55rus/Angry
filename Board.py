@@ -69,3 +69,6 @@ class Board:
     
     def get_board(self):
         return self.board
+        
+    def get_cell_content(self, coords):
+        return self.board[coords[0]][coords[1]]

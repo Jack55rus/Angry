@@ -10,7 +10,7 @@ class Path:
         char: a letter 
         '''
         self.char = char
-        self.board = np.copy(board.get_board())
+        self.board = np.copy(board.get_board()) # shallow copy to avoid path shifting after the board updating
         self.path = []
         self.n = len(self.board)
         self.p = int((self.n-3)/2) # number of pawns = # number of D-spots

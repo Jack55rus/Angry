@@ -14,8 +14,8 @@ class Pawn:
         return self.path.get_path() # display the whole path for the pawn
     
     def move(self, step):
-        self.check_in_D()
-        if self.is_in_D:
+        # self.check_in_D()
+        if self.check_in_D():
             self.current_position_idx += 0
             print('this pawn has already reached the D-zone')
         elif self.current_position_idx + step >= len(self.path.get_path()):
@@ -32,11 +32,19 @@ class Pawn:
         # print('entered check_in_D')
         # print('self.current_position_idx', self.current_position_idx, 'len(self.path.get_path())', len(self.path.get_path()), 'self.Ds', self.Ds)
         # print('self.is_in_D', self.is_in_D)
-        self.is_in_D = True if self.current_position_idx >= len(self.path.get_path()) - self.Ds else False
+        # self.is_in_D = True if self.current_position_idx >= len(self.path.get_path()) - self.Ds else False
+        if self.current_position_idx >= len(self.path.get_path()) - self.Ds:
+            self.is_in_D = True
+            return True
+        else:
+            self.is_in_D = False
+            return False
         
     def back_home(self):
         # send the pawn back to the home area. Necessary when a pawn is suspended by the opponent's one
         self.current_position_idx = 0
         
+    def look_further(self, how_far):# look what is located how_far steps away from the current pawn
+        return self.path.get_path()[self.current_position_idx + how_far]
     
     
