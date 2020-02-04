@@ -144,3 +144,6 @@ class Path:
     def get_path(self):
         self.path = self.create_path()
         return self.path
+    
+    def get_path_len(self):
+        return len(self.path)

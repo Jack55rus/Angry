@@ -45,6 +45,7 @@ class Pawn:
         self.current_position_idx = 0
         
     def look_further(self, how_far):# look what is located how_far steps away from the current pawn
+        if self.current_position_idx + how_far >= self.path.get_path_len():
+            return self.path.get_path()[self.current_position_idx]
         return self.path.get_path()[self.current_position_idx + how_far]
-    
     
